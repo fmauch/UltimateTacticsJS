@@ -55,6 +55,39 @@ define(['RaphaelCanvas', 'Options', 'FieldFactory', 'PlayerFactory', 'ButtonFact
     playerFactory.createDefensePlayer(5 * dist);
     playerFactory.createDefensePlayer(6 * dist);
     playerFactory.createDefensePlayer(7 * dist);
+    
+    function loadPlay( ) {
+      if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      }
+      else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.open("GET","plays/test.xml",false);
+      xmlhttp.send();
+      xmlDoc = xmlhttp.responseXML;
+      
+//       document.write(xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue);
+      frame = xmlDoc.getElementsByTagName("frame");
+      for ( var i=0; i<frame.length; i++) {
+        speed = frame[i].getElementsByTagName("speed")[0].childNodes[0].nodeValue;
+        offense = frame[i].getElementsByTagName("offense");
+        defense = frame[i].getElementsByTagName("defense");
+        for ( var j=0; j<offense.length; j++ ) {
+          playerFactory.getOffenseSet()[j].animate({
+            cx: offense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
+            cy: offense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
+          }, speed);
+          playerFactory.getDefenseSet()[j].animate({
+            cx: defense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
+            cy: defense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
+          }, speed);
+        }
+      }
+    };
+    var loadButton = buttonFactory.createButton('Load', loadPlay);
+    // translate the button to the side of the field
+    loadButton.translate(options.field.width + 10, 100);
 
     // time used for the animation in the startAnimation function
     var animationTime = 1500;
@@ -62,10 +95,12 @@ define(['RaphaelCanvas', 'Options', 'FieldFactory', 'PlayerFactory', 'ButtonFact
     // to move to the middle of the field.
     function startAnimation() {
         playerFactory.getOffenseSet().animate({
-            cy: options.field.length / 2
+            cy: options.field.length / 2,
+            cx: options.field.width / 2
         }, animationTime);
         playerFactory.getDefenseSet().animate({
-            cy: options.field.length / 2
+            cy: options.field.length / 2,
+            cx: options.field.width / 2
         }, animationTime);
     };
     
@@ -73,6 +108,25 @@ define(['RaphaelCanvas', 'Options', 'FieldFactory', 'PlayerFactory', 'ButtonFact
     var runButton = buttonFactory.createButton('Run', startAnimation);
     // translate the button to the side of the field
     runButton.translate(options.field.width + 10, 5);
+    
+    // function which resets all players on the ground line
+    function reset() {
+      for ( var k in playerFactory.getOffenseSet() ) {
+        playerFactory.getOffenseSet()[k].attr({
+            cy: options.field.endzoneDepth + options.player.size,
+            cx: dist + k * dist + options.player.size
+        });
+        playerFactory.getDefenseSet()[k].attr({
+            cy: options.field.length - options.field.endzoneDepth + options.player.size,
+            cx: dist + k * dist + options.player.size
+        });
+      }
+    }
+    
+    // create a button and set the reset function as its action method
+    var resetButton = buttonFactory.createButton('Reset', reset);
+    // translate the button to the side of the field
+    resetButton.translate(options.field.width + 10, 50);
     
     // push all objects into one set and translate it so that it is not too close to the border
     var all = raphaelCanvas.set();

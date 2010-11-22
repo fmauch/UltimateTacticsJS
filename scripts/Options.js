@@ -29,7 +29,7 @@
  */
 define(function() {
     /** @private */
-    var scale = 3;
+    var scale = 5;
     /** @private */
     var length = scale * 100;
     /** @private */
@@ -51,7 +51,9 @@ define(function() {
             /** Vertical size of the viewer. */
             length: length,
             /** Horizontal size of the viewer. */
-            width: width
+            width: width,
+            /** Scale factor */
+            scale: scale
         },
         /** Options related to the visualisation of the playing field. */
         field: {
