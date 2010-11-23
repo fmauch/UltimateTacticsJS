@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<play>
+  <title>Title of the play</title>
+  <frame>
+    <text>
+      Some text describing the frame.
+    </text>
+    <speed>1500</speed>
+    <offense>
+      <posX>5</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>10</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>15</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>20</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>25</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>30</posX>
+      <posY>18</posY>
+    </offense>
+    <offense>
+      <posX>35</posX>
+      <posY>18</posY>
+    </offense>
+    
+    <defense>
+      <posX>5</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>10</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>15</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>20</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>25</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>30</posX>
+      <posY>82</posY>
+    </defense>
+    <defense>
+      <posX>35</posX>
+      <posY>82</posY>
+    </defense>
+
+    <disc>
+      <posX>100</posX>
+      <posY>100</posY>
+    </disc>
+  </frame>
+<!--   ... -->
+</play>

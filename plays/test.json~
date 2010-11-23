@@ -1,0 +1,74 @@
+{
+  "title": "Title of the play",
+  "frame": [
+    {
+      "text": "Some text describing the frame.",
+      "time": "1500",
+      "offense": [
+        {
+          "posX": "5",
+          "posY": "18"
+        },
+        {
+          "posX": "10",
+          "posY": "18"
+        },
+        {
+          "posX": "15",
+          "posY": "18"
+        },
+        {
+          "posX": "20",
+          "posY": "18"
+        },
+        {
+          "posX": "25",
+          "posY": "18"
+        },
+        {
+          "posX": "30",
+          "posY": "18"
+        },
+        {
+          "posX": "35",
+          "posY": "18"
+        }
+      ],
+      "defense": [
+        {
+          "posX": "5",
+          "posY": "82"
+        },
+        {
+          "posX": "10",
+          "posY": "82"
+        },
+        {
+          "posX": "15",
+          "posY": "82"
+        },
+        {
+          "posX": "20",
+          "posY": "82"
+        },
+        {
+          "posX": "25",
+          "posY": "82"
+        },
+        {
+          "posX": "30",
+          "posY": "82"
+        },
+        {
+          "posX": "35",
+          "posY": "82"
+        }
+      ],
+      "disc": 
+      {
+        "posX": "100",
+        "posY": "100"
+      }
+    }
+  ]
+}
