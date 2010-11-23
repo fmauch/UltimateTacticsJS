@@ -56,34 +56,38 @@ define(['RaphaelCanvas', 'Options', 'FieldFactory', 'PlayerFactory', 'ButtonFact
     playerFactory.createDefensePlayer(6 * dist);
     playerFactory.createDefensePlayer(7 * dist);
     
+    function playCode() 
+    { 
+      if (xmlhttp.readyState == 4) 
+      { 
+        xmlDoc = eval('(' + xmlhttp.responseText + ')'); 
+      }
+    } 
+    
     function loadPlay( ) {
-      if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-      }
-      else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.open("GET","plays/test.xml",false);
-      xmlhttp.send();
-      xmlDoc = xmlhttp.responseXML;
+      xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET","plays/test.json", true);
+      xmlhttp.onreadystatechange = playCode;
+      xmlhttp.send(null);
       
 //       document.write(xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue);
-      frame = xmlDoc.getElementsByTagName("frame");
-      for ( var i=0; i<frame.length; i++) {
-        speed = frame[i].getElementsByTagName("speed")[0].childNodes[0].nodeValue;
-        offense = frame[i].getElementsByTagName("offense");
-        defense = frame[i].getElementsByTagName("defense");
-        for ( var j=0; j<offense.length; j++ ) {
-          playerFactory.getOffenseSet()[j].animate({
-            cx: offense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
-            cy: offense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
-          }, speed);
-          playerFactory.getDefenseSet()[j].animate({
-            cx: defense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
-            cy: defense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
-          }, speed);
-        }
-      }
+      frame = xmlDoc.frame;
+      document.write(xmldoc.title.value)
+//       for ( var i=0; i<frame.length; i++) {
+//         speed = frame[i].getElementsByTagName("speed")[0].childNodes[0].nodeValue;
+//         offense = frame[i].getElementsByTagName("offense");
+//         defense = frame[i].getElementsByTagName("defense");
+//         for ( var j=0; j<offense.length; j++ ) {
+//           playerFactory.getOffenseSet()[j].animate({
+//             cx: offense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
+//             cy: offense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
+//           }, speed);
+//           playerFactory.getDefenseSet()[j].animate({
+//             cx: defense[j].getElementsByTagName("posX")[0].childNodes[0].nodeValue * options.viewer.scale,
+//             cy: defense[j].getElementsByTagName("posY")[0].childNodes[0].nodeValue * options.viewer.scale
+//           }, speed);
+//         }
+//       }
     };
     var loadButton = buttonFactory.createButton('Load', loadPlay);
     // translate the button to the side of the field
