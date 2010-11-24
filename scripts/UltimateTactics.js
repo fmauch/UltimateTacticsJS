@@ -56,23 +56,23 @@ define(['RaphaelCanvas', 'Options', 'FieldFactory', 'PlayerFactory', 'ButtonFact
     playerFactory.createDefensePlayer(6 * dist);
     playerFactory.createDefensePlayer(7 * dist);
     
-    function playCode() 
-    { 
-      if (xmlhttp.readyState == 4) 
-      { 
-        xmlDoc = eval('(' + xmlhttp.responseText + ')'); 
-      }
-    } 
-    
     function loadPlay( ) {
-      xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET","plays/test.json", true);
-      xmlhttp.onreadystatechange = playCode;
-      xmlhttp.send(null);
+      alert('hallo');
+      
+      var my_JSON_object = {}; 
+      var http_request = new XMLHttpRequest();
+      http_request.open( "GET", "plays/test2.json", true );
+      http_request.onreadystatechange = function () {
+        if (http_request.readyState == 4 && http_request.status == 200){
+            my_JSON_object = JSON.parse( http_request.responseText );
+        }
+      };
+      http_request.send(null);
+      
       
 //       document.write(xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue);
-      frame = xmlDoc.frame;
-      document.write(xmldoc.title.value)
+//       frame = my_JSON_object.frame;
+      document.write(my_JSON_object.person.firstName.value)
 //       for ( var i=0; i<frame.length; i++) {
 //         speed = frame[i].getElementsByTagName("speed")[0].childNodes[0].nodeValue;
 //         offense = frame[i].getElementsByTagName("offense");
